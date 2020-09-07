@@ -24,25 +24,3 @@ def clean(text):
     text = RE_HYPHEN_SEQ.sub(' ', text)
     text = RE_MULTI_SPACE.sub(' ', text)
     return text.strip()
-    
-    
-
-import spacy    
-from IPython.core.display import display, HTML
-from tabulate import tabulate
-
-def display_nlp(doc, include_punct=False):
-    """Print tokens with attributes for spaCy doc."""
-    rows = []
-    for token in doc:
-        if not token.is_punct or include_punct:
-            row = (token.text, token.lemma_, 
-                   token.pos_, token.tag_, token.dep_,
-                   token.is_punct, token.is_alpha, token.is_stop,
-                   token.ent_type_, token.ent_iob_)
-            rows.append(row)
-
-    # generate HTML formatted table for display in Jupyter
-    headers = ['text', 'lemma_', 'pos_', 'tag_', 'dep_', 
-               'is_punct', 'is_alpha', 'is_stop', 'ent_type', 'ent_iob'] 
-    display(HTML(tabulate(rows, headers=headers, tablefmt='html')))
