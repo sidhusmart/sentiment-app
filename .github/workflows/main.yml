@@ -34,7 +34,7 @@ jobs:
 
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
-        gcloud container clusters get-credentials "$CLUSTER_NAME" --zone "$LOCATION_ZONE"
+        gcloud container clusters get-credentials ${{ secrets.CLUSTER_NAME }} --zone ${{ secrets.LOCATION_ZONE }}
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
