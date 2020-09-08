@@ -39,7 +39,7 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        kubectl set image --record deployment.apps/sentiment-app sentiment-app=sidhusmart/sentiment-app:{{ github.event.release.tag_name }}
+        kubectl set image --record deployment.apps/sentiment-app sentiment-app=sidhusmart/sentiment-app:${{ github.event.release.tag_name }}
 
     # Verify that deployment completed 
     - name: Verify Deployment
