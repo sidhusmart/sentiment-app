@@ -15,6 +15,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Get the Tag Name
+        id: source_details
+        run: |
+          echo ::set-output name=TAG_NAME::${GITHUB_REF#refs/tags/}
+
     - name: build and push image
       uses: docker/build-push-action@v1
       with:
@@ -39,7 +44,7 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        kubectl set image --record deployment.apps/sentiment-app sentiment-app=sidhusmart/sentiment-app:${{ github.event.release.tag_name }}
+        kubectl set image --record deployment.apps/sentiment-app sentiment-app=sidhusmart/sentiment-app:${{ steps.source_details.outputs.TAG_NAME }}
 
     # Verify that deployment completed 
     - name: Verify Deployment
