@@ -20,7 +20,7 @@ class Review(BaseModel):
     class Config:
         schema_extra = {
             "example": {
-                "reviewText": "This was a great purchase, saved me much time!",
+                "text": "This was a great purchase, saved me much time!",
                 "reviewerID": "A1VU337W6PKAR3",
                 "asin": "B00K0TIC56"
             }
